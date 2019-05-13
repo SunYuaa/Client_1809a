@@ -25,9 +25,11 @@ Route::get('/test/sendSec/','Test\TestController@sendSec');
 Route::get('/test/unSec/','Test\TestController@unSec');
 Route::get('/test/testSign/','Test\TestController@testSign');
 
+Route::get('/test/demo/','Test\DemoController@demo');
+
 //exam 注册登录
 Route::get('/login/register/','Exam\ThirteenController@register');
 Route::post('/login/regDo/','Exam\ThirteenController@regDo');
-Route::get('/login/login/','Exam\ThirteenController@login');
+Route::post('/login/login/','Exam\ThirteenController@login');
 
 
