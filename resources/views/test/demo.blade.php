@@ -15,7 +15,6 @@
 <script src="/js/jquery-3.2.1.min.js"></script>
 <script>
     $('#btn').click(function(){
-        alert(11);
         $.ajax({
             url:'http://api.1809a.com/test/demo/',
             dataType:'json',
