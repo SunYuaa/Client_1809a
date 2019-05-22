@@ -49,6 +49,10 @@ Route::middleware('RequestNum')->group(function(){
     Route::get('/legal/getUserInfo/','Exam\LegalController@getUserInfo');
 });
 
+//weixin
+Route::get('/wx/valid/','Work\WxController@valid');
+
+
 
 
 
