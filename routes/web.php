@@ -51,6 +51,8 @@ Route::middleware('RequestNum')->group(function(){
 
 //weixin
 Route::get('/wx/valid/','Work\WxController@valid');
+Route::post('/wx/valid/','Work\WxController@event');
+
 
 
 
