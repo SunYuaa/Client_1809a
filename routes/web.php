@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 //test
 Route::get('/test/test/','Test\TestController@test');
@@ -32,13 +35,20 @@ Route::get('/login/register/','Exam\ThirteenController@register');
 Route::post('/login/regDo/','Exam\ThirteenController@regDo');
 Route::post('/login/login/','Exam\ThirteenController@login');
 
-//
-Route::get('/legal/reg/','Exam\LegalController@register');
-Route::post('/legal/regDo/','Exam\LegalController@regDo');
+//exam 5.20
+Route::middleware('auth')->group(function(){
+    Route::get('/legal/reg/','Exam\LegalController@register');
+    Route::post('/legal/regDo/','Exam\LegalController@regDo');
+});
 Route::get('/legal/checkStatus/','Exam\LegalController@checkStatus');
-Route::get('/legal/token/','Exam\LegalController@token');
-Route::get('/legal/getUserIp/','Exam\LegalController@getUserIp')->middleware('RequestNum');
-Route::get('/legal/getUA/','Exam\LegalController@getUA')->middleware('RequestNum');
-Route::get('/legal/getUserInfo/','Exam\LegalController@getUserInfo')->middleware('RequestNum');
+
+Route::middleware('RequestNum')->group(function(){
+    Route::get('/legal/token/','Exam\LegalController@token');
+    Route::get('/legal/getUserIp/','Exam\LegalController@getUserIp');
+    Route::get('/legal/getUA/','Exam\LegalController@getUA');
+    Route::get('/legal/getUserInfo/','Exam\LegalController@getUserInfo');
+});
+
+
 
 

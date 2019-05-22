@@ -16,18 +16,18 @@ class RequestNum
      */
     public function handle($request, Closure $next)
     {
-//        var_dump($_SERVER);die;
         $ip = $_SERVER['SERVER_ADDR'];
         $key = 'requestNum:ip:'.$ip.':req:'.$request->input('request');
         $num = Redis::get($key);
+        Redis::incr($key);
         if($num > 20){
+//            Redis::expire($key,1800);
             die('请求次数超过限制');
         }
 
         echo 'num:'.$num;echo '<br/>';
         echo 'key:'.$key;echo '<hr/>';
 
-        Redis::incr($key);
         Redis::expire($key,60);
 
         return $next($request);

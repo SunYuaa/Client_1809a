@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Exam;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Exam\LegalModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redis;
 
@@ -21,6 +22,11 @@ class LegalController extends Controller
         $le_person = $request->input('le_person');
         $le_address = $request->input('le_address');
         $le_type = $request->input('le_type');
+        $le_img = $request->file('le_img');  //接收图片
+        //保存图片
+        $img_path = '/public/leImgs';
+        $file_name = Str::random(10).'.'.$le_img->getClientOriginalExtension();
+        $save_file = $le_img->storeAs($img_path,$file_name);
 
         $data = [
             'le_name' => $le_name,
@@ -28,7 +34,9 @@ class LegalController extends Controller
             'le_address' => $le_address,
             'le_type' => $le_type,
             'le_regnum' => '180900'.rand(11111,99999),
+            'le_img' => $save_file,
             'le_date' => time(),
+            'uid' => Auth::id()
         ];
         $id = LegalModel::insertGetId($data);
         if($id){
@@ -172,7 +180,7 @@ class LegalController extends Controller
     //接口 显示User-Agent
     public function getUA()
     {
-        //$url = 'http://client.1809a.com/legal/getUserIp?token=fdsfdsafdsfds&regnum=18090011111&request=UA';
+        //$url = 'http://client.1809a.com/legal/getUA?token=fdsfdsafdsfds&regnum=18090011111&request=UA';
         $token = $_GET['token'];
         $regnum = $_GET['regnum'];
         $UA = $_GET['request'];
@@ -214,7 +222,7 @@ class LegalController extends Controller
     //接口 显示用户信息
     public function getUserInfo()
     {
-        //$url = 'http://client.1809a.com/legal/userInfo?token=13treregf&regnum=18090011111&request=UserInfo';
+        //$url = 'http://client.1809a.com/legal/getUserInfo?token=13treregf&regnum=18090011111&request=userInfo';
         $token = $_GET['token'];
         $regnum = $_GET['regnum'];
         $user = $_GET['request'];

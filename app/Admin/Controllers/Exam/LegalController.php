@@ -87,6 +87,7 @@ class LegalController extends Controller
         $grid->le_person('代表人');
         $grid->le_address('住所');
         $grid->le_type('公司类型');
+        $grid->le_img('营业执照')->image();
         $grid->le_date('注册时间')->display(function($le_date){
             return date('Y-m-d H:i:s',$le_date);
         });

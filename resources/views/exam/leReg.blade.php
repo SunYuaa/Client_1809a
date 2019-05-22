@@ -8,12 +8,13 @@
 </head>
 <body>
     <h3>注册</h3><hr/>
-    <form action="/legal/regDo/" method='post'>
+    <form action="/legal/regDo/" method='post' enctype="multipart/form-data">
         @csrf
         名称：<input type="text" name='le_name'><br>
         负责人：<input type="text" name='le_person'><br>
         住所：<input type="text" name='le_address'><br>
         注册类型：<input type="text" name='le_type'><br>
+        营业执照：<input type="file" name="le_img"><br>
 
         <input type="submit" value="注册">
     </form>
